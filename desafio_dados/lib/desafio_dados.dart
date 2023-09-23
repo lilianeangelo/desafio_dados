@@ -79,10 +79,10 @@ void sortear(Map<String, int> jogo, String jogador) {
     if (dadoMagico) {
       if (soma == 0) {
         soma = soma ~/ 2;
-        print("Seu valor atual foi aumentado a: $soma");
+        print("Seu valor atual foi reduzido a: $soma");
       } else if (soma == 1) {
         soma *= 2;
-        print("Seu valor atual foi reduzido a: $soma");
+        print("Seu valor atual foi aumentado a: $soma");
       }
     }
     jogo[jogador] = soma + soma;
