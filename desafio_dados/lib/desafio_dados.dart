@@ -7,6 +7,10 @@ import 'dart:io';
 
 /* Iniciando valores nos jogadores */
 Map<String, int> jogo = {'jogador1': 0, 'jogador2': 0};
+int vitoriasJogador1 = 0;
+int vitoriasJogador2 = 0;
+int empates = 0;
+
 
 void instrucoes() {
   print("Segue as instruções: \n"
@@ -49,8 +53,6 @@ void inicializandoRodada() {
     print('--------------------------------------------------------------\n');
     sortear(jogo, 'jogador1');
     sortear(jogo, 'jogador2');
-
-    //colocar condicional se jogador aceitar dado mágico
   }
 }
 
@@ -60,8 +62,6 @@ void sortear(Map<String, int> jogo, String jogador) {
 
   final gerador = Random();
   int soma = 0;
-  bool jogador1UsouDadoMagico = false;
-  bool jogador2UsouDadoMagico = false;
 
   bool dadoMagico = usarDadoMagico();
 
@@ -77,8 +77,8 @@ void sortear(Map<String, int> jogo, String jogador) {
       print('$jogador rolou $iº dado de 6 faces: $faceDado');
       soma += faceDado;
     }
-  
-     /*Implementação da utilização do dado mágico*/
+
+    /*Implementação da utilização do dado mágico*/
     if (dadoMagico) {
       if (soma == 0) {
         soma = soma ~/ 2;
@@ -99,7 +99,6 @@ bool usarDadoMagico() {
   print('Deseja usar o dado mágico nesta rodada? (*S* - Sim, *N* - Não)');
   String resposta = stdin.readLineSync()!.toUpperCase();
   return resposta == 'S';
-
 }
 
 void pontuacao(Map<String, int> jogo) {
@@ -113,4 +112,27 @@ void pontuacao(Map<String, int> jogo) {
     final player = ranking[i];
     print('${i + 1}º lugar: ${player.key} com ${player.value} pontos.');
   }
+}
+
+void exibirPlacar() {
+  int vitoriasJogador1 = 0;
+  int vitoriasJogador2 = 0;
+  int empates = 0;
+
+  for (int rodada = 1; rodada <= numeroRodadas; rodada++) {
+    int pontuacaoJogador1 = int.parse(jogo['jogador1'].toString());
+    int pontuacaoJogador2 = int.parse(jogo['jogador2'].toString());
+    if (pontuacaoJogador1 > pontuacaoJogador2 ) {
+      vitoriasJogador1++;
+    } else if (pontuacaoJogador2 > pontuacaoJogador1) {
+      vitoriasJogador2++;
+    } else {
+      empates++;
+    }
+  }
+
+  print('\n========*=========*======== PLACAR ===========*==========*========');
+  print('Jogador 1 venceu $vitoriasJogador1 vezes.');
+  print('Jogador 2 venceu $vitoriasJogador2 vezes.');
+  print('Houve $empates empates.');
 }
