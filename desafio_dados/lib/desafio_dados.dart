@@ -7,9 +7,6 @@ import 'dart:io';
 
 /* Iniciando valores nos jogadores */
 Map<String, int> jogo = {'jogador1': 0, 'jogador2': 0};
-int vitoriasJogador1 = 0;
-int vitoriasJogador2 = 0;
-int empates = 0;
 
 
 void instrucoes() {
